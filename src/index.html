@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  @@include('html/head.html', {
+    'title': 'Aura AI'
+  })
+  <body>
+
+    <div id="root" class="site">
+      <div class="site__inner">
+        @@include('html/components/header.html')
+        <main role="main" class="site__main">
+          <section class="aura-intro site__main-intro">
+            <div class="container aura-intro__container">
+              <div class="aura-intro__center">
+                <picture class="aura-intro__media">
+                  <img src="images/intro-img.jpg" alt="Hello! I am Aùra Ai  Ask me about the future">
+                </picture>
+                <div class="aura-intro__content">
+                  <h1 class="aura-intro__title">Hello! I am <span>Aùra Ai</span><br>Ask me about <span>the future</span></h1>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="site__main-aura">
+            <div class="aura-chat site-main__chat">
+              <div class="aura-chat__body">
+                <div class="container aura-chat__body-container">
+                  <div class="aura-chat__main" id="chatContentBox"></div>
+                </div>
+              </div>
+              <div class="aura-chat__center">
+                <div class="container aura-chat__center-container">
+                  <div class="aura-chat__footer">
+                    <div class="aura-chat__message">
+                      <form action="#" class="aura-chat__message-form">
+                        <div contenteditable="true" role="textbox" autofocus class="aura-chat__message-textarea"></div>
+                        <button type="button" class="aura-chat__message-btn is-right">
+                          <span class="visually-hidden">Send</span>
+                          <svg class="u-icon">
+                            <use xlink:href="images/icons/icons.svg#send"></use>
+                          </svg>
+                        </button>
+                      </form>
+                    </div>
+                    <nav class="aura-chat__nav">
+                      <ul class="aura-chat__nav-list">
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">terms of use</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">privacy policy</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">cookie</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">ú inc. constitution</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">contacts</a>
+                        </li>
+                      </ul>
+                    </nav>
+                    <p class="aura-chat__copyright">© 2023 ńVerse Government Authority</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    @@include('html/script.html')
+  </body>
+</html>

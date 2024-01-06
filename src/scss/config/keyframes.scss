@@ -1,0 +1,11 @@
+@keyframes pulseDot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(.9);
+    opacity: .9;
+  }
+}

@@ -1,0 +1,20 @@
+/* Headings, Common BEM Blocks, and More... */
+
+.hint-card {
+  background: rgba($blackColor, .2);
+  max-width: 100%;
+  padding: 6rem 13rem;
+  display: inline-flex;
+  font-weight: 300;
+  font-size: 18rem;
+  font-family: $accentFont;
+  line-height: 1.2;
+  border: 1px solid $grayColor;
+  border-radius: 20rem;
+  cursor: pointer;
+  transition: $transition;
+  &:hover {
+    background: rgba($grayColor, .2);
+    text-decoration: none;
+  }
+}

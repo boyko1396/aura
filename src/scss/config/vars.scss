@@ -1,0 +1,60 @@
+$siteResolution: 1px;
+$mainFont: 'TT Norms Pro';
+$accentFont: 'Montserrat';
+$mainWeight: 300;
+$lineHeightMedium: 1.3;
+$lineHeightTitle: 1.2;
+$lineHeightDefault: $lineHeightMedium;
+
+$containerWidth: 1250rem;
+
+$whiteColor: #ffffff;
+$white1Color: #FBFBFB;
+$blackColor: #000000;
+$grayColor: #8A8A8A;
+$gray1Color: #D3D3D3;
+$gray2Color: #929292;
+$blueColor: #2A72CC;
+$accentColor: $blueColor;
+
+$fontFamily: $mainFont, sans-serif;
+$fontColor: $whiteColor;
+$fontWeight: $mainWeight;
+
+$transition: all .4s 0ms;
+
+$sizeArea: 550rem;
+$sizeAreaChat: 810rem;
+
+$lg: 1199px;
+$lg-mf: $lg + 1;
+
+$md: 991px;
+$md-mf: $md + 1;
+
+$sm: 767px;
+$sm-mf: $sm + 1;
+
+$xs: 576px;
+$xs-mf: $xs;
+
+:root {
+  --fs-default: 14rem;
+  --fs-1: 26rem;
+  --fs-2: 24rem;
+  --fs-3: 22rem;
+  --fs-4: 20rem;
+  --fs-5: 18rem;
+  --fs-6: 16rem;
+  --fs-7: 19rem;
+  --fs-8: 21rem;
+  --offset: 15rem;
+  --offset-: -15rem;
+  --gap: 25rem;
+  --gap-: -25rem;
+  @media (max-width: $md) {
+    --fs-default: 12rem;
+    --fs-5: 16rem;
+    --fs-1: 22rem;
+  }
+}

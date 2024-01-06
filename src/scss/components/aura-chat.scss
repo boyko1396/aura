@@ -1,0 +1,203 @@
+.aura-chat {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  &__body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    &-container {
+      max-height: 100%;
+      margin-top: auto;
+    }
+  }
+  &__center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  &__footer {
+    width: 100%;
+    margin: 0 auto;
+  }
+  &__message {
+    max-width: $sizeArea;
+    margin: 0 auto;
+    &-form {
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 22rem;
+      position: relative;
+      overflow: hidden;
+    }
+    &-textarea {
+      background: $blackColor;
+      max-width: 100%;
+      min-width: 108rem;
+      min-height: 40rem;
+      max-height: 148rem;
+      padding: 7rem 56rem 7rem 18rem;
+      display: block;
+      font-weight: 300;
+      font-size: var(--fs-7);
+      line-height: 1.25;
+      color: $whiteColor;
+      outline: none;
+      border: 1px solid $grayColor;
+      border-radius: 22rem;
+      resize: none;
+      overflow: auto;
+    }
+    &-btn {
+      @extend %area-click, %btn-reset;
+      width: 24rem;
+      height: 24rem;
+      color: $whiteColor;
+      position: absolute;
+      right: 8rem;
+      bottom: 8rem;
+      transition: $transition;
+      cursor: pointer;
+      z-index: 1;
+      &:hover {
+        opacity: .6;
+      }
+      &.is-right {
+        .u-icon {
+          transform: rotate(90deg);
+        }
+      }
+      .u-icon {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+  }
+  &__nav {
+    max-width: $sizeArea;
+    margin: 34rem auto 15rem;
+    font-size: var(--fs-5);
+    color: $gray1Color;
+    @media (max-width: $md) {
+      margin: 60rem auto 10rem;
+      font-size: 12rem;
+    }
+    &-list {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      list-style-type: none;
+      @media (max-width: $md) {
+        justify-content: center;
+      }
+    }
+    &-item {
+      margin: 0 2rem;
+      padding: 0;
+      @media (max-width: $md) {
+        margin: 0 5rem;
+      }
+    }
+    &-link {
+      display: block;
+      transition: $transition;
+      &:hover {
+        color: rgba($white1Color, .5);
+        text-decoration: none;
+      }
+    }
+  }
+  &__copyright {
+    max-width: $sizeArea;
+    margin: 0 auto 40rem;
+    color: rgba($white1Color, .5);
+    text-align: center;
+    @media (max-width: $md) {
+      margin-bottom: 30rem;
+    }
+  }
+  &__main {
+    max-width: $sizeAreaChat;
+    margin: 0 auto;
+    padding: 180rem 0 30rem;
+    @media (max-width: $md) {
+      margin-bottom: 25rem;
+    }
+  }
+  &__card {
+    &:not(:last-child) {
+      margin-bottom: 24rem;
+    }
+    &-list {
+    }
+    &-name {
+      margin: 0 0 6rem;
+      font-weight: bold;
+      font-size: var(--fs-8);
+    }
+    &-text {
+      margin: 0;
+      font-weight: 300;
+      font-size: var(--fs-7);
+      line-height: 1.25;
+    }
+    &-dot {
+      background-color: $whiteColor;
+      width: 26rem;
+      height: 26rem;
+      border-radius: 50%;
+      animation: linear pulseDot .7s infinite;
+    }
+  }
+  &__hint {
+    padding: 90rem 0 0;
+    &-title {
+      margin: 0 0 10rem;
+      font-weight: normal;
+      font-size: 18rem;
+    }
+    &-list {
+      max-width: 380rem;
+      margin-bottom: -12rem;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &-card {
+      margin: 0 8rem 12rem 0;
+    }
+  }
+}
+
+body {
+  &.is-chat {
+    .aura-chat__message-form,
+    .aura-chat__message-textarea {
+      width: 100%;
+    }
+    .aura-chat__message {
+      max-width: $sizeAreaChat;
+      width: $sizeAreaChat;
+      @media (max-width: $md) {
+        max-width: 100%;
+      }
+    }
+    .aura-chat__message-btn.is-right {
+      .u-icon {
+        transform: none;
+      }
+    }
+    .aura-intro__content {
+      display: none;
+    }
+    .aura-intro__media {
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%) scale(2.2);
+    }
+  }
+}

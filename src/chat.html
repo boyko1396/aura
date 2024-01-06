@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  @@include('html/head.html', {
+    'title': 'Aura AI'
+  })
+  <body class="is-chat">
+
+    <div id="root" class="site">
+      <div class="site__inner">
+        @@include('html/components/header.html')
+        <main role="main" class="site__main">
+          <section class="aura-intro site__main-intro">
+            <div class="container aura-intro__container">
+              <div class="aura-intro__center">
+                <picture class="aura-intro__media">
+                  <img src="images/intro-img.jpg" alt="Hello! I am Aùra Ai  Ask me about the future">
+                </picture>
+                <div class="aura-intro__content">
+                  <h1 class="aura-intro__title">Hello! I am <span>Aùra Ai</span><br>Ask me about <span>the future</span></h1>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="site__main-aura">
+            <div class="aura-chat site-main__chat">
+              <div class="aura-chat__body">
+                <div class="container aura-chat__body-container">
+                  <div class="aura-chat__main" id="chatContentBox">
+                    <div class="aura-chat__card-list">
+                      <div class="aura-chat__card">
+                        <div class="aura-chat__card-name">Me</div>
+                        <div class="aura-chat__card-text">Can you explain the ńVigate glasses and their features?</div>
+                      </div>
+                      <div class="aura-chat__card">
+                        <div class="aura-chat__card-name">Aùra Ai</div>
+                        <div class="aura-chat__card-text">The ńVigate glasses are a part of ńVerse's suite of augmented reality devices designed to work in conjunction with the ñion app, enhancing user experiences significantly. These glasses are a key component in the ecosystem developed by ńVerse, which aims to bridge the gap between digital innovation and physical experiences.<br>Based on the information provided, here are the key features and functionalities of the ńVigate glasses:<br>1. Augmented Reality Integration: The glasses</div>
+                      </div>
+                      <div class="aura-chat__card">
+                        <div class="aura-chat__card-name">Aùra Ai</div>
+                        <div class="aura-chat__card-dot"></div>
+                      </div>
+                    </div>
+                    <div class="aura-chat__hint">
+                      <p class="aura-chat__hint-title">Do you want to know about</p>
+                      <div class="aura-chat__hint-list">
+                        <div class="hint-card aura-chat__hint-card">ńGame mode</div>
+                        <div class="hint-card aura-chat__hint-card">ńDate</div>
+                        <div class="hint-card aura-chat__hint-card">roadmap</div>
+                        <div class="hint-card aura-chat__hint-card">ńApp</div>
+                        <div class="hint-card aura-chat__hint-card">investments</div>
+                        <div class="hint-card aura-chat__hint-card">our team</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="aura-chat__center">
+                <div class="container aura-chat__center-container">
+                  <div class="aura-chat__footer">
+                    <div class="aura-chat__message">
+                      <div class="aura-chat__message-form">
+                        <div contenteditable="true" role="textbox" autofocus class="aura-chat__message-textarea">to work in conjunction with the ñion app, enhancing user experiences significantly user experiences significantly user experiences significantly user experiences significantly user experiences significantly user experiences significantly user experiences significantly user experiences significantly user experiences significantly</div>
+                        <button type="button" class="aura-chat__message-btn is-right">
+                          <span class="visually-hidden">Send</span>
+                          <svg class="u-icon">
+                            <use xlink:href="images/icons/icons.svg#send"></use>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <nav class="aura-chat__nav">
+                      <ul class="aura-chat__nav-list">
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">terms of use</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">privacy policy</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">cookie</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">ú inc. constitution</a>
+                        </li>
+                        <li class="aura-chat__nav-item">
+                          <a href="#" class="aura-chat__nav-link">contacts</a>
+                        </li>
+                      </ul>
+                    </nav>
+                    <p class="aura-chat__copyright">© 2023 ńVerse Government Authority</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    @@include('html/script.html')
+  </body>
+</html>
