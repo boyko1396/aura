@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendMessageBtn = document.getElementById('sendMessageBtn');
   const chatContainer = document.getElementById('chatContentBody');
   const chatHint = document.getElementById('chatContentHint');
+  const chatHintButtons = document.querySelectorAll('.js-hint-card');
   const DESKTOP_WIDTH_THRESHOLD = 560;
-  const MOBILE_WIDTH_THRESHOLD = 360;
+  const MOBILE_WIDTH_THRESHOLD = 350;
 
   let isTyping = true;
 
@@ -55,26 +56,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendMessageByEnter = () => {
     const message = messageTextarea.innerText.trim();
     const useMock = true;
-    const url = useMock ? 'http://3.75.239.18/post_message_mock' : 'http://3.75.239.18/post_message';
+    const apiUrl = useMock ? 'http://3.75.239.18/post_message_mock' : 'http://3.75.239.18/post_message';
 
     if (message !== '' && !isTyping) {
       addChatCard('Me', message);
-      sendMessage(message, url);
+      sendMessage(message, apiUrl, useMock);
       document.body.classList.add('is-chat');
     }
 
     messageTextarea.focus();
   };
 
-  const sendMessage = (message, url) => {
+  const sendHintMessage = (hint) => {
+    const useMock = true;
+    const apiUrl = useMock ? 'http://3.75.239.18/post_message_mock' : 'http://3.75.239.18/post_message';
+
+    addChatCard('Me', hint);
+    sendMessage(hint, apiUrl, useMock);
+    document.body.classList.add('is-chat');
+  };
+
+  const sendMessage = (message, apiUrl, useMock) => {
     addChatCard('Aùra Ai', '', true);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
+    xhr.open('POST', apiUrl, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     const data = {
-      message: message
+      message: message,
+      useMock: useMock
     };
 
     xhr.send(JSON.stringify(data));
@@ -92,16 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
+  chatHintButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const hint = button.getAttribute('data-hint');
+      sendHintMessage(hint);
+    });
+  });
+
   let successfulResponsesCount = 0;
 
   const handleSuccessfulResponse = (xhr) => {
-    console.log('Сообщение успешно отправлено');
     const jsonResponse = JSON.parse(xhr.responseText);
     addChatCard('Aùra Ai', jsonResponse.answer);
     messageTextarea.innerHTML = '';
     updateSendButtonState();
     messageTextarea.focus();
-    console.log('Ответ сервера:', jsonResponse);
 
     successfulResponsesCount++;
 
