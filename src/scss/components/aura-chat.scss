@@ -12,33 +12,29 @@
       margin-top: auto;
     }
   }
-  &__center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-  }
   &__footer {
     width: 100%;
     margin: 0 auto;
   }
-  &__message {
-    max-width: $sizeArea;
+  &__block {
+  }
+  &__user {
+  }
+  &__form {
+    max-width: $sizeAreaChat;
     margin: 0 auto;
-    &-form {
-      width: fit-content;
-      max-width: 100%;
-      margin: 0 auto;
-      border-radius: 22rem;
-      position: relative;
-      overflow: hidden;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $radiusMd;
+    position: relative;
+    overflow: hidden;
     &-textarea {
       background: $blackColor;
       max-width: 100%;
       min-width: 108rem;
-      min-height: 40rem;
       max-height: 148rem;
+      min-height: 40rem;
       padding: 7rem 56rem 7rem 18rem;
       display: block;
       font-weight: 300;
@@ -47,7 +43,8 @@
       color: $whiteColor;
       outline: none;
       border: 1px solid $grayColor;
-      border-radius: 22rem;
+      border-radius: $radiusMd;
+      transition: all .6s;
       resize: none;
       overflow: auto;
     }
@@ -55,13 +52,15 @@
       @extend %area-click, %btn-reset;
       width: 24rem;
       height: 24rem;
+      margin: 0 0 0 -24rem;
+      display: block;
+      align-self: flex-end;
       color: $whiteColor;
-      position: absolute;
-      right: 8rem;
-      bottom: 8rem;
+      flex-shrink: 0;
       transition: $transition;
+      top: -8rem;
+      left: -8rem;
       cursor: pointer;
-      z-index: 1;
       &:hover {
         opacity: .6;
       }
@@ -78,29 +77,28 @@
     }
   }
   &__nav {
-    max-width: $sizeArea;
     margin: 34rem auto 15rem;
     font-size: var(--fs-5);
     color: $gray1Color;
     @media (max-width: $md) {
-      margin: 60rem auto 10rem;
+      margin: 50rem auto 10rem;
       font-size: 12rem;
     }
     &-list {
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       list-style-type: none;
-      @media (max-width: $md) {
-        justify-content: center;
-      }
     }
     &-item {
-      margin: 0 2rem;
+      margin: 0;
       padding: 0;
-      @media (max-width: $md) {
-        margin: 0 5rem;
+      &:not(:last-child) {
+        margin-right: 24rem;
+        @media (max-width: $md) {
+          margin-right: 13rem;
+        }
       }
     }
     &-link {
@@ -113,18 +111,17 @@
     }
   }
   &__copyright {
-    max-width: $sizeArea;
     margin: 0 auto 40rem;
     color: rgba($white1Color, .5);
     text-align: center;
     @media (max-width: $md) {
-      margin-bottom: 30rem;
+      margin-bottom: 15rem;
     }
   }
   &__main {
     max-width: $sizeAreaChat;
     margin: 0 auto;
-    padding: 180rem 0 30rem;
+    padding: 120rem 0 30rem;
     @media (max-width: $md) {
       margin-bottom: 25rem;
     }
@@ -139,12 +136,14 @@
       margin: 0 0 6rem;
       font-weight: bold;
       font-size: var(--fs-8);
+      word-wrap: break-word;
     }
     &-text {
       margin: 0;
       font-weight: 300;
       font-size: var(--fs-7);
       line-height: 1.25;
+      word-wrap: break-word;
     }
     &-dot {
       background-color: $whiteColor;
@@ -156,6 +155,9 @@
   }
   &__hint {
     padding: 90rem 0 0;
+    &:not(.is-show) {
+      display: none;
+    }
     &-title {
       margin: 0 0 10rem;
       font-weight: normal;
@@ -175,20 +177,9 @@
 
 body {
   &.is-chat {
-    .aura-chat__message-form,
-    .aura-chat__message-textarea {
-      width: 100%;
-    }
-    .aura-chat__message {
-      max-width: $sizeAreaChat;
-      width: $sizeAreaChat;
-      @media (max-width: $md) {
-        max-width: 100%;
-      }
-    }
-    .aura-chat__message-btn.is-right {
-      .u-icon {
-        transform: none;
+    .aura-chat__form {
+      &-textarea {
+        min-width: 100%;
       }
     }
     .aura-intro__content {

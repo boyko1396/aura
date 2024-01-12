@@ -23,25 +23,38 @@
           </section>
           <div class="site__main-aura">
             <div class="aura-chat site-main__chat">
-              <div class="aura-chat__body">
+              <div class="aura-chat__body" id="chatContentBox">
                 <div class="container aura-chat__body-container">
-                  <div class="aura-chat__main" id="chatContentBox"></div>
+                  <div class="aura-chat__main">
+                    <div class="aura-chat__card-list" id="chatContentBody"></div>
+                    <div class="aura-chat__hint" id="chatContentHint">
+                      <p class="aura-chat__hint-title">Do you want to know about</p>
+                      <div class="aura-chat__hint-list">
+                        <button type="button" class="aura-chat__hint-card hint-card">ńGame mode</button>
+                        <button type="button" class="aura-chat__hint-card hint-card">ńDate</button>
+                        <button type="button" class="aura-chat__hint-card hint-card">roadmap</button>
+                        <button type="button" class="aura-chat__hint-card hint-card">ńApp</button>
+                        <button type="button" class="aura-chat__hint-card hint-card">investments</button>
+                        <button type="button" class="aura-chat__hint-card hint-card">our team</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="aura-chat__center">
-                <div class="container aura-chat__center-container">
-                  <div class="aura-chat__footer">
-                    <div class="aura-chat__message">
-                      <form action="#" class="aura-chat__message-form">
-                        <div contenteditable="true" role="textbox" autofocus class="aura-chat__message-textarea"></div>
-                        <button type="button" class="aura-chat__message-btn is-right">
-                          <span class="visually-hidden">Send</span>
-                          <svg class="u-icon">
-                            <use xlink:href="images/icons/icons.svg#send"></use>
-                          </svg>
-                        </button>
-                      </form>
-                    </div>
+              <div class="aura-chat__block">
+                <div class="container">
+                  <div class="aura-chat__user">
+                    <form method="POST" action="#" class="aura-chat__form">
+                      <div contenteditable="plaintext-only" role="textbox" autofocus class="aura-chat__form-textarea" id="messageTextarea"></div>
+                      <button type="button" class="aura-chat__form-btn is-right" id="sendMessageBtn">
+                        <span class="visually-hidden">Send</span>
+                        <svg class="u-icon">
+                          <use xlink:href="images/icons/icons.svg#send"></use>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                  <footer class="aura-chat__footer">
                     <nav class="aura-chat__nav">
                       <ul class="aura-chat__nav-list">
                         <li class="aura-chat__nav-item">
@@ -62,7 +75,7 @@
                       </ul>
                     </nav>
                     <p class="aura-chat__copyright">© 2023 ńVerse Government Authority</p>
-                  </div>
+                  </footer>
                 </div>
               </div>
             </div>

@@ -7,6 +7,8 @@
   position: fixed;
   top: 0;
   left: 0;
+  pointer-events: none;
+  user-select: none;
   &__container {
   }
   &__center {
@@ -21,6 +23,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: all .6s;
     pointer-events: none;
     z-index: -1;
     img {
