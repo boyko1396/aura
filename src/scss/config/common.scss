@@ -15,8 +15,13 @@
   border-radius: 20rem;
   cursor: pointer;
   transition: $transition;
+  @media (max-width: $md) {
+    font-size: 12rem;
+  }
   &:hover {
-    background: rgba($grayColor, .3);
-    text-decoration: none;
+    @media (min-width: $lg-mf) {
+      background: rgba($grayColor, .3);
+      text-decoration: none;
+    }
   }
 }

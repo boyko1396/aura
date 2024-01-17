@@ -7,6 +7,8 @@
  * If we want to add a module, we should uncomment it.
  */
 
+import './modules/app.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const textToType = 'What is Aùra Ai?';
   const chatContentBox = document.getElementById('chatContentBox');
@@ -63,8 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
       sendMessage(message, apiUrl, useMock);
       document.body.classList.add('is-chat');
     }
-
-    messageTextarea.focus();
   };
 
   const sendHintMessage = (hint) => {
@@ -117,12 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
     addChatCard('Aùra Ai', jsonResponse.answer);
     messageTextarea.innerHTML = '';
     updateSendButtonState();
-    messageTextarea.focus();
 
     successfulResponsesCount++;
 
-    if (successfulResponsesCount >= 3) {
+    if (successfulResponsesCount >= 1) {
       chatHint.classList.add('is-show');
+      chatContentBox.scrollTop = chatContentBox.scrollHeight;
+    }
+
+    if (successfulResponsesCount >= 3) {
+      chatHint.classList.remove('is-show');
     }
   };
 
@@ -171,8 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         document.body.classList.remove('is-chat');
       }
-    } else {
+    } else if (screenWidth <= 1200 && screenWidth > 400) {
       if (messageTextarea.offsetWidth > MOBILE_WIDTH_THRESHOLD) {
+        document.body.classList.add('is-chat');
+      } else {
+        document.body.classList.remove('is-chat');
+      }
+    } else {
+      if (messageTextarea.offsetWidth > 260) {
         document.body.classList.add('is-chat');
       } else {
         document.body.classList.remove('is-chat');

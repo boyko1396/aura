@@ -37,7 +37,10 @@ $sm: 767px;
 $sm-mf: $sm + 1;
 
 $xs: 576px;
-$xs-mf: $xs;
+$xs-mf: $xs + 1;
+
+$exs: 400px;
+$exs-mf: $xs + 1;
 
 :root {
   --fs-default: 14rem;

@@ -12,9 +12,9 @@
           <section class="aura-intro site__main-intro">
             <div class="container aura-intro__container">
               <div class="aura-intro__center">
-                <picture class="aura-intro__media">
-                  <img src="images/intro-img.jpg" alt="Hello! I am Aùra Ai  Ask me about the future">
-                </picture>
+                <canvas id="canvas" width="400" height="400" class="aura-intro__media">
+                  Your browser does not support the canvas!
+                </canvas>
                 <div class="aura-intro__content">
                   <h1 class="aura-intro__title">Hello! I am <span>Aùra Ai</span><br>Ask me about <span>the future</span></h1>
                 </div>
@@ -29,13 +29,15 @@
                     <div class="aura-chat__card-list" id="chatContentBody"></div>
                     <div class="aura-chat__hint" id="chatContentHint">
                       <p class="aura-chat__hint-title">Do you want to know about</p>
-                      <div class="aura-chat__hint-list">
-                        <button type="button" data-hint="Tell me about nGame mode" class="js-hint-card aura-chat__hint-card hint-card">ńGame mode</button>
-                        <button type="button" data-hint="Tell me about nDate" class="js-hint-card aura-chat__hint-card hint-card">ńDate</button>
-                        <button type="button" data-hint="Show me roadmap" class="js-hint-card aura-chat__hint-card hint-card">roadmap</button>
-                        <button type="button" data-hint="Tell me about nApp" class="js-hint-card aura-chat__hint-card hint-card">ńApp</button>
-                        <button type="button" data-hint="Tell me about investments" class="js-hint-card aura-chat__hint-card hint-card">investments</button>
-                        <button type="button" data-hint="Tell me about fromnverse team" class="js-hint-card aura-chat__hint-card hint-card">our team</button>
+                      <div class="aura-chat__hint-list-wrapper">
+                        <div class="aura-chat__hint-list">
+                          <button type="button" data-hint="Tell me about nGame mode" class="js-hint-card aura-chat__hint-card hint-card">ńGame mode</button>
+                          <button type="button" data-hint="Tell me about nDate" class="js-hint-card aura-chat__hint-card hint-card">ńDate</button>
+                          <button type="button" data-hint="Show me roadmap" class="js-hint-card aura-chat__hint-card hint-card">roadmap</button>
+                          <button type="button" data-hint="Tell me about nApp" class="js-hint-card aura-chat__hint-card hint-card">ńApp</button>
+                          <button type="button" data-hint="Tell me about investments" class="js-hint-card aura-chat__hint-card hint-card">investments</button>
+                          <button type="button" data-hint="Tell me about fromnverse team" class="js-hint-card aura-chat__hint-card hint-card">our team</button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -14,18 +14,15 @@
   &__center {
   }
   &__media {
-    width: 84%;
-    min-width: 600rem;
-    height: 84%;
-    min-height: 600rem;
+    width: 100%;
+    height: 100%;
     margin-top: -60rem;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     transition: all .6s;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
     img {
       width: 100%;
       height: 100%;
@@ -35,6 +32,8 @@
   }
   &__content {
     margin-top: -100rem;
+    position: relative;
+    z-index: 1;
   }
   &__title {
     margin: 0;
