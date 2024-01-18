@@ -84,6 +84,16 @@ void main() {
 
 
 
+  //! EXPLOSION VALUE
+  /*float explosion = 0.0;
+
+  if (uTime > 2.0*PI) 
+  explosion = sin(uTime*0.75)*1.0+1.0;
+  
+  t -= exp(explosion*2.0)*0.1;
+  */
+
+
 
   angle.x = (
     sin(pos.x*angleNoiseSize+t)
@@ -111,12 +121,10 @@ void main() {
   //! RANDOM
   #ifdef IS_RAND
     float randScale = RAND_SCALE;
-    //if (uMouse.z > 0.0)
-    //randScale = 0.01+RAND_SCALE-(abs(angle.x)+abs(angle.y)+abs(angle.z))*RAND_SCALE;
     angle += vec3(
       surface3(vec3(pos.xy*100.0, 0.0))*randScale,
       surface3(vec3(pos.yz*100.0, 0.0))*randScale,
-      surface3(vec3(pos.yx*100.0, 0.0))*randScale
+      surface3(vec3(pos.zx*100.0, 0.0))*randScale
     );
   #endif
 
@@ -144,13 +152,23 @@ void main() {
 
   //! STATE EXPLOSION
   /*
-  float explosion = mod(1.0-uTime*0.1, 1.0);
-  explosion = sin(explosion*PI);
-  
-  angle *= 1.0-(explosion)*0.45; 
-  radius -= (tan(surface3(vec3(pos.xy*10.0+t*0.1, 0.0))*(explosion))*2.0-4.0);
-  //radius -= (tan(uTime+surface3(vec3(pos.xy*100.0+uTime*0.1, 0.0)))*0.1)*clamp(0.0, 1.0, (explosion*0.5));
-  radius -= (surface3(vec3(pos.xy*1.0+uTime*0.1, 0.0)))*explosion*0.1;
+  if (explosion > 1.5) {
+    radius += explosion*0.4-0.9;
+  } else {
+    radius -= explosion*0.2;
+  }
+
+  explosion -= 1.0;
+  explosion = clamp(explosion, 0.0, 1.0);
+
+
+  if (explosion > 0.0)
+  angle *= 1.0-(explosion*2.0)*0.7; 
+
+
+
+  //radius += (tan(uTime*3.0+surface3(vec3(pos.xy*100.0+uTime*0.1, 0.0)))*0.2)*(explosion*0.1);
+  radius += tan(uTime+exp(surface3(vec3(pos.xy*100.0+uTime*0.1, 0.0))))*(explosion*0.1);
 */
 
 

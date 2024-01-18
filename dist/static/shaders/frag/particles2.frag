@@ -25,10 +25,11 @@ void main(){
     vec3 angle = vAngle;
 
     alpha = 0.05;
-    alpha -= (vAngleSpeed)*(6.0-sin(vDepth))*0.01;
+    alpha -= (vAngleSpeed)*(3.0-sin(vDepth))*0.015;
     
 
-
+        //! STATE LOADING 
+/*
         float openAngle = vLoadValue * 180.0;
         vec2 rotUV = rotate2D(pos.xy, -90.0 + openAngle);
         float angleL = atan(rotUV.y, rotUV.x);
@@ -38,7 +39,7 @@ void main(){
             alpha = 0.0;
         }
         alpha -= (1.19-length(pos.xy))*(0.2-vPostLoad*0.2);
-        
+    */
     
 
 
@@ -59,6 +60,9 @@ void main(){
     //col = vec3(0.0, 0.4, 0.8)*0.5+0.2+vAngleSpeed*0.1;
     col = vec3(0.0, 0.3, 0.8)+0.3+vAngleSpeed*0.1;
     col.g += cos(vAngleSpeed*10.0)*0.05;
+
+
+    alpha *= 2.0;
 
 
     //col.rgb = normalize(vec3(vAngle));

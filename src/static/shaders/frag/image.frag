@@ -17,11 +17,13 @@ void main(){
     vec2 uv = vUv;
     
     colP = vec4(texture(particles, uv).rgb, 1.0);
-    //colB = fastBlur(particles, uv, uResolution, vec2(2.0));
+    colB = fastBlur(particles, uv, uResolution, vec2(2.0));
+
+
 
     col = colP+vec4(colB, 1.0);
+    //col = colP;
 
-    col = colP;
 
 
 

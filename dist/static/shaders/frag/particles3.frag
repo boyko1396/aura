@@ -4,13 +4,17 @@
 
 uniform sampler2D voronoi;
 
+in float vVertID;
 in vec3 vPos;
 in vec2 vUV;
 in vec3 vNormal;
 in float vDepth;
-in float vSpeed;
-in float vVertID;
 in vec3 vAngle;
+
+
+in float vAngleSpeed;
+in float vLoadValue;
+in float vPostLoad;
 
 vec3 col = vec3(1.0);
 float alpha = 1.0;
@@ -65,21 +69,16 @@ vec3 voronoiN( in vec2 x )
     return vec3( mr, md );
 }
 
+float glow(vec2 r) {
+    return pow(0.3 / length(r), 1.3); // change magic constants here
+}
+vec3 glow_corrected(vec3 base_col, vec2 r) {
+    float g = glow(r) - glow(vec2(1,0)); // bound correction
+    return 1. - exp(-g * base_col); //col correction
+}
+
 void main(){
-    /*float radius = 1.0;
-    float d = distance(gl_PointCoord, vec2(0.5));
-    float c = 1.0-smoothstep(-radius, radius, d);
-    c = pow(c, 3.0);*/
 
-
-    alpha = 0.0;
-    //if (d < 1.0) 
-    {
-        alpha = 0.05;
-        //alpha -= (vSpeed)*0.05;
-        //alpha -= (vSpeed)*((vDepth))*0.02;
-        alpha -= (vSpeed)*(6.0-sin(vDepth))*0.01;
-    }
 
     //! LIGHT
     //alpha += 0.03*(dot(normalize(vNormal), (vec3(-1.0, 1.0, 1.0))));
@@ -92,22 +91,23 @@ void main(){
     }
 
 
-    //! COLOR
-    col = mix(vec3(0.3, 0.6, 1.0), vec3(1.5), vSpeed*0.15);
-    //col = vec3(0.4, 0.6, 1.0)+vSpeed*0.1;
-    //col = vec3(0.0, 0.4, 0.8)*0.5+0.2+vSpeed*0.1;
-    //col = vec3(0.0, 0.3, 0.8)+0.3+vSpeed*0.1;
-    col.g += cos(vSpeed*10.0)*0.05;
+    vec2 pointcoord = gl_PointCoord;
+    vec2 r = 2.*pointcoord - 1.;
+    vec3 base_col = vec3(0.2, 0.5, 1.0);
+    float d = length(r);
 
-    alpha *= 4.0;
+    col = glow_corrected(base_col, r);
 
 
-    vec2 p = gl_PointCoord;
-    vec3 c = voronoiN((p+rand2(vPos.xy+vAngle.xy)));//texture(voronoi, p).rgb;
 
-	float dd = length( c.xy );
-    float a = 0.1;
-    col.rgb *= (1.0-smoothstep( a, a*2.0, dd));
+    alpha = d*0.2;
+    if (d < 0.2) 
+    {
+        alpha = 1.0;
+        //alpha -= (vSpeed)*0.05;
+        //alpha -= (vSpeed)*((vDepth))*0.02;
+        alpha -= (vAngleSpeed)*(6.0-sin(vDepth))*0.01;
+    }
 
 
 
