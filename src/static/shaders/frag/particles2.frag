@@ -3,17 +3,17 @@
 
 
 
-in float vVertID;
-in vec3 vPos;
-in vec2 vUV;
-in vec3 vNormal;
-in float vDepth;
-in vec3 vAngle;
+varying float vVertID;
+varying vec3 vPos;
+varying vec2 vUV;
+varying vec3 vNormal;
+varying float vDepth;
+varying vec3 vAngle;
 
 
-in float vAngleSpeed;
-in float vLoadValue;
-in float vPostLoad;
+varying float vAngleSpeed;
+varying float vLoadValue;
+varying float vPostLoad;
 
 vec3 col = vec3(0.0);
 float alpha = 1.0;

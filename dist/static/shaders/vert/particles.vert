@@ -7,10 +7,10 @@ uniform float uPointsCount;
 uniform vec3 uMousePosSphere;
 
 
-out vec3 vPos;
-out float vDepth;
-out float vSpeed;
-out float vVertID;
+varying vec3 vPos;
+varying float vDepth;
+varying float vSpeed;
+varying float vVertID;
 
 uniform sampler2D tNoise;
 

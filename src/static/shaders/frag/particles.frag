@@ -2,10 +2,10 @@
 #include <chank>
 
 
-in vec3 vPos;
-in float vDepth;
-in float vSpeed;
-in float vVertID;
+varying vec3 vPos;
+varying float vDepth;
+varying float vSpeed;
+varying float vVertID;
 
 vec3 col = vec3(1.0);
 float alpha = 1.0;

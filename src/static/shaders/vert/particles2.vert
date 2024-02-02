@@ -8,15 +8,15 @@ uniform vec3 uMousePosSphere;
 uniform sampler2D voronoi;
 
 
-out vec3 vPos;
-out vec2 vUV;
-out vec3 vNormal;
-out float vDepth;
-out float vVertID;
-out vec3 vAngle;
-out float vAngleSpeed;
-out float vLoadValue;
-out float vPostLoad;
+varying vec3 vPos;
+varying vec2 vUV;
+varying vec3 vNormal;
+varying float vDepth;
+varying float vVertID;
+varying vec3 vAngle;
+varying float vAngleSpeed;
+varying float vLoadValue;
+varying float vPostLoad;
 
 mat3 rotateX(float angle) {
     float s = sin(angle);
@@ -49,7 +49,7 @@ mat3 rotateZ(float angle) {
 }
 
 void main() {
-  float idx = float(gl_VertexID);
+  //float idx = float(gl_VertexID);
   vec3 pos = vec3(position);
   vec3 view = uViewPos;
   float t = uTime;
@@ -130,7 +130,7 @@ void main() {
 
   vAngle = angle;
 
-
+/*
   //! AURA
   #ifdef IS_AURA
     vec3 aura = AURA;
@@ -147,7 +147,7 @@ void main() {
       radius -= fract(surface3(vec3(pos.xy*auraIns.y+t*0.01, 0.0)))*auraIns.z;
     }
   #endif
-
+*/
 
 
   //! STATE EXPLOSION
@@ -218,7 +218,7 @@ void main() {
   vUV = uv;
   vNormal = normal;
   vPos = position;
-  vVertID = idx;
+  //vVertID = idx;
   vDepth = length((modelViewMatrix * vec4(pos, 1.0)).xyz)
   -distance(view, vec3(0.0))+(6.0-INSIDE_SHERE_SIZE);
 

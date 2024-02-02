@@ -7,9 +7,16 @@
  * If we want to add a module, we should uncomment it.
  */
 
-import './modules/app.js';
+// support webp, identify device
+import BaseHelpers from './helpers/BaseHelpers.js';
+BaseHelpers.addLoadedClass();
 
 document.addEventListener('DOMContentLoaded', () => {
+  // hide keyboard
+  var textareaMessageEl = document.getElementById('messageTextarea');
+  document.activeElement.blur();
+
+  // chat
   const textToType = 'What is Aùra Ai?';
   const chatContentBox = document.getElementById('chatContentBox');
   const messageTextarea = document.getElementById('messageTextarea');
@@ -22,13 +29,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isTyping = true;
 
-  const typeTextEffect = (text, element) => {
+  const typeTextEffect = (text, element, delay) => {
+    setTimeout(() => {
+      if (document.documentElement.classList.contains('is-loaded')) {
+        isTyping = true;
+
+        const typeCharacter = (index) => {
+          if (index < text.length) {
+            element.innerHTML += text.charAt(index);
+            index++;
+
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            range.collapse(false);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            setTimeout(() => {
+              typeCharacter(index);
+            }, 10);
+          } else {
+            isTyping = false;
+          }
+        };
+
+        typeCharacter(0);
+      }
+    }, delay);
+  };
+
+  typeTextEffect(textToType, messageTextarea, 450);
+
+  const typeApiResponse = (text, element) => {
+    isTyping = true;
+
     const typeCharacter = (index) => {
       if (index < text.length) {
         element.innerHTML += text.charAt(index);
         index++;
 
-        element.focus();
         const range = document.createRange();
         range.selectNodeContents(element);
         range.collapse(false);
@@ -38,16 +78,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
           typeCharacter(index);
-        }, 70);
+        }, 30);
+
+        element.classList.add('is-active');і
       } else {
         isTyping = false;
+
+        element.classList.remove('is-active');
       }
     };
 
     typeCharacter(0);
   };
-
-  typeTextEffect(textToType, messageTextarea);
 
   const updateSendButtonState = () => {
     const isMessageEmpty = messageTextarea.innerHTML.trim() === '';
@@ -57,19 +99,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const sendMessageByEnter = () => {
     const message = messageTextarea.innerText.trim();
-    const useMock = true;
-    const apiUrl = useMock ? 'http://3.75.239.18/post_message_mock' : 'http://3.75.239.18/post_message';
+    const useMock = false;
+    const apiUrl = 'https://api.fromnverse.com/post_message';
 
     if (message !== '' && !isTyping) {
       addChatCard('Me', message);
       sendMessage(message, apiUrl, useMock);
       document.body.classList.add('is-chat');
+
+      // const newUrl = '/chat/';
+      // history.pushState({ page: 'chat' }, 'Chat', newUrl);
+
+      messageTextarea.innerHTML = '';
+      updateSendButtonState();
     }
   };
 
+  window.addEventListener('popstate', (event) => {
+    window.location.href = '/';
+  });
+
   const sendHintMessage = (hint) => {
-    const useMock = true;
-    const apiUrl = useMock ? 'http://3.75.239.18/post_message_mock' : 'http://3.75.239.18/post_message';
+    const useMock = false;
+    const apiUrl = 'https://api.fromnverse.com/post_message';
 
     addChatCard('Me', hint);
     sendMessage(hint, apiUrl, useMock);
@@ -114,7 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleSuccessfulResponse = (xhr) => {
     const jsonResponse = JSON.parse(xhr.responseText);
-    addChatCard('Aùra Ai', jsonResponse.answer);
+    const answerText = jsonResponse.answer;
+
+    const highlightedAnswer = highlightWordsInStars(answerText);
+
+    addChatCard('Aùra Ai', '');
+    typeApiResponse(highlightedAnswer, chatContainer.lastChild.querySelector('.aura-chat__card-text'));
     messageTextarea.innerHTML = '';
     updateSendButtonState();
 
@@ -128,6 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (successfulResponsesCount >= 3) {
       chatHint.classList.remove('is-show');
     }
+  };
+
+  const highlightWordsInStars = (text) => {
+    return text.replace(/\*\*([^*]+)\*\*/g, (match, word) => {
+      return `<strong>${word}</strong>`;
+    });
   };
 
   const handleErrorResponse = (xhr) => {
@@ -147,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cardName.appendChild(cardDot);
     }
 
-    const cardText = document.createElement('div');
+    const cardText = document.createElement('pre');
     cardText.className = 'aura-chat__card-text';
     cardText.innerHTML = text;
 
@@ -168,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   messageTextarea.addEventListener('input', () => {
     const screenWidth = window.innerWidth;
+    messageTextarea.classList.add('is-typing');
 
     if (screenWidth > 1200) {
       if (messageTextarea.offsetWidth > DESKTOP_WIDTH_THRESHOLD) {
@@ -190,6 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateSendButtonState();
+  });
+
+  messageTextarea.addEventListener('click', () => {
+    messageTextarea.classList.add('is-typing');
   });
 
   messageTextarea.addEventListener('keydown', (event) => {

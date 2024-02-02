@@ -56,12 +56,41 @@
       font-size: var(--fs-7);
       line-height: 1.25;
       color: $whiteColor;
+      caret-color: transparent;
       outline: none;
       box-shadow: inset 0 0 0 1px $grayColor;
       border-radius: $radiusMd;
       transition: all .6s;
       resize: none;
       overflow: auto;
+      &.is-typing {
+        caret-color: $whiteColor;
+      }
+      &.is-typing:after {
+        opacity: 0;
+        visibility: hidden;
+      }
+      &:after {
+        background: currentColor;
+        width: 1px;
+        height: 1.2em;
+        margin: -.22em 0 0;
+        content: '';
+        display: inline-block;
+        animation: blinkCursor 1.2s infinite;
+        position: relative;
+        left: -1px;
+        transition: all .4s;
+        vertical-align: middle;
+        @keyframes blinkCursor {
+          0%, 50% {
+            opacity: 0;
+          }
+          51%, 100% {
+            opacity: 1;
+          }
+        }
+      }
     }
     &-btn {
       @extend %area-click, %btn-reset;
@@ -151,13 +180,16 @@
     padding: 120rem 0 30rem;
   }
   &__card {
-    &:not(:last-child) {
-      margin-bottom: 24rem;
-      @media (max-width: $md) {
-        margin-bottom: 20rem;
-      }
+    padding-bottom: 24rem;
+    overflow: hidden;
+    @media (max-width: $md) {
+      padding-bottom: 20rem;
     }
     &-list {
+      margin-bottom: -24rem;
+      @media (max-width: $md) {
+        margin-bottom: -20rem;
+      }
     }
     &-name {
       margin: 0 0 6rem;
@@ -171,20 +203,38 @@
     }
     &-text {
       margin: 0;
+      padding: 0 0 10px;
+      display: inline;
       font-weight: 300;
       font-size: var(--fs-7);
       line-height: 1.25;
+      font-family: inherit;
       word-wrap: break-word;
+      white-space: pre-wrap;
+      position: relative;
       @media (max-width: $sm) {
         font-size: 14rem;
       }
+      &:after {
+        background: $whiteColor;
+        height: 1.4em;
+        margin: -0.2em -50rem 0 -50rem;
+        filter: blur(12px);
+        padding: 0 60rem 1.4em 0;
+        vertical-align: middle;
+        display: inline-block;
+        content: '';
+        border-radius: 8rem;
+        pointer-events: none;
+        transition: all .4s;
+        opacity: .18;
+      }
     }
     &-dot {
-      background-color: $whiteColor;
+      background: url(../images/loader.gif) 50% / contain no-repeat;
       width: 26rem;
       height: 26rem;
       border-radius: 50%;
-      animation: linear pulseDot .7s infinite;
     }
   }
   &__hint {
@@ -298,5 +348,18 @@ body {
     .aura-intro__media {
       transform: scale(3);
     }
+    .aura-chat__form-textarea {
+      caret-color: #fff;
+      &:after {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
   }
+}
+
+.aura-chat__card-text:not(.is-active):after {
+  width: 0;
+  opacity: 0;
+  visibility: hidden;
 }

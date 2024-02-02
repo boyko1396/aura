@@ -13,7 +13,7 @@ const float OffsetDist = 4.;
 const float Samples = 8.;
 #define TAU 6.28318530718
 vec4 RadialBlur(sampler2D tex, vec2 coord, vec2 res, float radius) {
-    if(radius <= 0.) return texture(tex, coord/res.xy);
+    if(radius <= 0.) return texture2D(tex, coord/res.xy);
     vec2 offset;
     float angle = 0.;
     vec4 color = vec4(0.);
@@ -21,7 +21,7 @@ vec4 RadialBlur(sampler2D tex, vec2 coord, vec2 res, float radius) {
     for(float angle = 0.; angle < TAU; angle += (TAU/Samples)) {
         
         offset = vec2(cos(angle), sin(angle)) * radius;
-        color += texture(tex, (coord + offset)/res.xy);
+        color += texture2D(tex, (coord + offset)/res.xy);
     }
     
     return color/Samples;
@@ -39,7 +39,7 @@ vec4 FastBlur(sampler2D tex, vec2 coord, vec2 res, float radius) {
     }
     return color/fibTotal;
 }
-
+/*
 vec3 fastBlur(sampler2D tex, vec2 uv, vec2 res, vec2 kd){
     float r = kd.x * kd.y;
     float rr = 1.0/r;
@@ -54,7 +54,7 @@ vec3 fastBlur(sampler2D tex, vec2 uv, vec2 res, vec2 kd){
             a++;
             vec2 c = uv + vec2(x,y) * texel;
 
-            col += texture(tex, c 
+            col += texture2D(tex, c 
             + fract(sin(dot(c, vec2(12.9898, 78.233))) * 43758.5453) * texel * kd.y * 2.0
             - kd.yy * texel
             ).rgb * (2.0 - distance(vec2(x,y) * rr, vec2(0.0)));
@@ -62,8 +62,8 @@ vec3 fastBlur(sampler2D tex, vec2 uv, vec2 res, vec2 kd){
         
     }
     return col / a;
-}
-
+}*/
+/*
 vec3 blurBokeh(sampler2D tex, vec2 uv, vec2 tSize, float radius, float amount)
 {
   float ITERATIONS = 150.0;
@@ -78,14 +78,14 @@ vec3 blurBokeh(sampler2D tex, vec2 uv, vec2 tSize, float radius, float amount)
 	for (float j = 0.0; j < GOLDEN_ANGLE * ITERATIONS; j += GOLDEN_ANGLE)
     {
 
-		vec3 col = texture(tex, uv + pixel * Sample(j, r)).xyz;
+		vec3 col = texture2D(tex, uv + pixel * Sample(j, r)).xyz;
        // col = col * col * 1.2; // ...contrast it for better highlights
 		vec3 bokeh = vec3(.5) + pow(col, vec3(10.0)) * amount;
 		acc += col * bokeh;
 		div += bokeh;
 	}
 	return acc / div;
-}
+}*/
 
 float rand (in vec2 st) {
     return fract(sin(dot(st.xy,
@@ -152,17 +152,17 @@ float normalizeRange (float value, float minValue, float maxValue) {
 }
 
 vec3 generateNormal(sampler2D tex, vec2 texCoord, vec2 texelSize) {
-    vec3 dx = vec3(texelSize.x, 0.0, texture(tex, texCoord + vec2(texelSize.x, 0.0)).r - texture(tex, texCoord - vec2(texelSize.x, 0.0)).r);
-    vec3 dy = vec3(0.0, texelSize.y, texture(tex, texCoord + vec2(0.0, texelSize.y)).r - texture(tex, texCoord - vec2(0.0, texelSize.y)).r);
+    vec3 dx = vec3(texelSize.x, 0.0, texture2D(tex, texCoord + vec2(texelSize.x, 0.0)).r - texture2D(tex, texCoord - vec2(texelSize.x, 0.0)).r);
+    vec3 dy = vec3(0.0, texelSize.y, texture2D(tex, texCoord + vec2(0.0, texelSize.y)).r - texture2D(tex, texCoord - vec2(0.0, texelSize.y)).r);
     return normalize(cross(dy, -dx));
 }
-
+/*
 int vec3ToInt(vec3 color) {
   vec3 scaledColor = color * 255.0;
   vec3 roundedColor = round(scaledColor);
   int intValue = int(roundedColor.r) * 256 * 256 + int(roundedColor.g) * 256 + int(roundedColor.b);
   return intValue;
-}
+}*/
 
 float sumVec3(vec3 vec) {
   return vec.x+vec.y+vec.z;
